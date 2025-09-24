@@ -1,0 +1,6 @@
+.centered {
+  width: 2000px;
+  margin: 0 auto;
+  background: lightblue;
+  text-align: center;
+}
