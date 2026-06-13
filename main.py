@@ -18,28 +18,19 @@ class ResearchResponse(BaseModel):
     sources: list[str]
 
 def askQuestion(query: str):
-    llm = ChatAnthropic(model="claude-3-5-sonnet-20241022")
-    parser= PydanticOutputParser(pydantic_object=ResearchResponse)
 
-    prompt= ChatPromptTemplate.from_messages(
-        [
-            (
-            "system",
-            """
-            You are a car mechanic that will help diagnose issues and give handy car advice.
-            Answer the user query and use the necessary tools. You must ONLY output valid JSON. Do not include any text outside the JSON.
-            Wrap the output in this format and provide no other text \n{format_instructions}
-            """
-            ),
-        ("placeholder", "{chat_history}"),
-        ("human", "{query}"),
-        ("placeholder", "{agent_scratchpad}"),
-        ]
+    llm = ChatAnthropic(model="claude-opus-4-8")
 
-    ).partial(format_instructions=parser.get_format_instructions())
-    #response = llm.invoke("How do I fix spark plugs?")
-    #print(response)
+    prompt = ChatPromptTemplate.from_messages([
+        ("system", "You are a car mechanic. Give clear, readable advice."),
+        ("human", "{query}")
+    ])
 
+    chain = prompt | llm
+    response = chain.invoke({"query": query})
+
+    return response.content
+    """
     tools = [search_tool, wiki_tool]
     agent = create_tool_calling_agent(
         llm=llm,
@@ -69,3 +60,5 @@ def askQuestion(query: str):
         return str(topic+"\n"+diagnosis+"\n"+recommendations)
     except Exception as e:
         return "Error parsing response", e, "Raw Response - ", raw_response
+    """
+
