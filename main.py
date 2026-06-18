@@ -18,18 +18,20 @@ class ResearchResponse(BaseModel):
     sources: list[str]
 
 def askQuestion(query: str):
+    try: 
+        llm = ChatAnthropic(model="claude-opus-4-8")
 
-    llm = ChatAnthropic(model="claude-opus-4-8")
+        prompt = ChatPromptTemplate.from_messages([
+            ("system", "You are a car mechanic. Give clear, readable advice."),
+            ("human", "{query}")
+        ])
 
-    prompt = ChatPromptTemplate.from_messages([
-        ("system", "You are a car mechanic. Give clear, readable advice."),
-        ("human", "{query}")
-    ])
+        chain = prompt | llm
+        response = chain.invoke({"query": query})
 
-    chain = prompt | llm
-    response = chain.invoke({"query": query})
-
-    return response.content
+        return response.content
+    except Exception as e:
+        return "Error parsing response", e, "Raw Response - ", response
     """
     tools = [search_tool, wiki_tool]
     agent = create_tool_calling_agent(
