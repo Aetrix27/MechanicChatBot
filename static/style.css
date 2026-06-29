@@ -1,6 +1,109 @@
+body,
+html {
+  background: black;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .centered {
-  width: 2000px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
   margin: 0 auto;
-  background: lightblue;
+  justify-content: center;
+  align-items: center;
   text-align: center;
+  height: 100vh;
+}
+
+#container {
+  width: 50vw;
+  margin: 0 auto;
+  background-color: #003459;
+  border: 1px solid #00a8e8;
+  padding: 2em;
+  border-radius: 2em;
+}
+
+.divider {
+  border-bottom: 1px solid #007ea7;
+  margin: 1em 0;
+  width: 100%;
+}
+
+h1 {
+  text-align: center;
+}
+
+#chatcontent{
+  color: white;
+}
+#bwuh {
+  background-image: radial-gradient(#63B09A 5%, #639FB0 15%, #636FB0 60%);
+}
+
+#header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 3em 3em;
+  gap: 1em;
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-weight: 900;
+  color: white;
+}
+
+#subheader {
+  font-weight: 300;
+  color: white;
+}
+
+#promptInput {
+  color: white;
+  background-color: #333;
+}
+#promptInput::placeholder {
+    color: #cccccc; 
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#donate {
+  color: white;
+}
+
+input {
+  border-radius: 0.5rem;
+  background-color: #c0c0c085;
+}
+
+input:focus {
+  border-color: #fff;
+  transition: border-color 0.3s ease;
+  box-shadow: none;
+}
+
+input:focus-visible {
+  border-color: none;
+  -moz-appearance: none;
+}
+
+input.submit:hover {
+  background-color: #ffffff85;
+  transition: background-color 0.3s ease;
+  cursor: default;
 }

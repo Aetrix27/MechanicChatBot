@@ -1,39 +1,44 @@
 <!DOCTYPE html>
 <head>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MechAssist</title>
 
-<div class="centered" style="margin-top: 50px;">
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="src/style.css">
 
-<h1 id = "title">AI Mechanic Chatbot</h1>
-<link rel="stylesheet" href="/static/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
- <div style="background-image: radial-gradient(#63B09A 5%, #639FB0 15%, #636FB0 60%);">
-    <div id="newEventDiv" class="centered; width: 60%;">
-      <h1>Hey there! What question do you have about your car?</h1>
-      <h2>Donate here: <a href="https://www.paypal.com/donate/?business=R4CEZAQB6AEWQ&no_recurring=0&item_name=Support+the+development+of+making+a+more+advanced+AI+Mechanic%21&currency_code=USD" target="_blank">Donate Here</a></h2>
-      <main>
-        <form method='POST'>
-            <label>
-                
-                <input type="text" name="prompt">
-            </label>
-            <input type="submit" class="submit" value="Ask">
-            
-        </form>
-              <p>{{ output }}</p>
-      {% if newOutput %}
-        <p>You entered: {{ newOutput }}</p>
-    {% endif %}
-      </main>
-      
+   <div id="container">
+    <div id="header">
+      <h1 class="divider">MechAssist</h1>
+      <h1 id="subheader" class="divider">Hey there! What question do you have about your car?</h1>
     </div>
-    <footer>
-      
-    </footer>
-    </div>
-  </body>
-</div>
+     <main>
+      <form method="POST">
+        <input type="text" name="prompt" placeholder="Type your question here..." id="promptInput">
+        <input type="submit" class="submit" value="Ask">
+      </form>
+
+      <div id="chatcontent">
+        {% if newOutput %}
+          {{ newOutput }}
+          <strong>AI Mechanic:</strong> {{ output }}
+        {% endif %}<br><br>
   
+      </div>
+    </main>
+      
+  </div>
+
+  <h2 id="donate">
+    Click here to support and help improve my MechAssist!:
+    <a href="https://www.paypal.com/donate/?business=R4CEZAQB6AEWQ&no_recurring=0&item_name=Support+the+development+of+making+a+more+advanced+AI+Mechanic!&currency_code=USD"
+      target="_blank">Donate Here</a>
+  </h2>
+
+</body>
+
 </html>
