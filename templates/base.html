@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,15 +9,20 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
   <link rel="stylesheet" href="src/style.css">
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Sansation:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
+    rel="stylesheet">
 </head>
-<body>
-   <div id="container">
+
+<body class="bg">
+  <div id="container">
     <div id="header">
-      <h1 class="divider">MechAssist</h1>
+      <h1 class="divider logo">MECH•ASSIST</h1>
       <h1 id="subheader" class="divider">Hey there! What question do you have about your car?</h1>
     </div>
-     <main>
+    <main>
       <form method="POST">
         <input type="text" name="prompt" placeholder="Type your question here..." id="promptInput">
         <input type="submit" class="submit" value="Ask">
@@ -24,13 +30,13 @@
 
       <div id="chatcontent">
         {% if newOutput %}
-          {{ newOutput }}
-          <strong>AI Mechanic:</strong> {{ output }}
+        {{ newOutput }}
+        <strong></strong> {{ output }}
         {% endif %}<br><br>
-  
+
       </div>
     </main>
-      
+
   </div>
 
   <h2 id="donate">
