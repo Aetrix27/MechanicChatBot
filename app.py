@@ -52,7 +52,8 @@ def create_app():
             outputPresent=True
 
             output=askQuestion(prompt)
-            return render_template('base.html', output=output, outputPresent=outputPresent)
+            newOutput=prompt
+            return render_template('base.html', output=output, newOutput=newOutput,outputPresent=outputPresent)
         else:
             outputPresent=False
   
