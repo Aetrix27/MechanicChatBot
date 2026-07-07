@@ -23,24 +23,32 @@
       <h1 id="subheader" class="divider">Hey there! What question do you have about your car?</h1>
     </div>
     <main>
+      
       <form method="POST">
-        <input type="text" name="prompt" placeholder="Type your question here..." id="promptInput">
+        <input
+            type="text"
+            name="prompt"
+            placeholder="Type your question here..."
+            id="promptInput"
+        >
         <input type="submit" class="submit" value="Ask">
-      </form>
+    </form>
 
-      <div id="chatcontent">
-        {% if newOutput %}
-        {{ newOutput }}
-        <strong></strong> {{ output }}
-        {% endif %}<br><br>
-
-      </div>
+    <div id="chatcontent">
+        {% for chat in chat_history %}
+            <div class="message">
+                <strong>You:</strong> {{ chat.prompt }}<br>
+                <strong>Assistant:</strong> {{ chat.output }}
+            </div>
+            <br>
+        {% endfor %}
+    </div>
     </main>
 
   </div>
 
   <h2 id="donate">
-    Click here to support and help improve my MechAssist!:
+    Click here to support and help improve MechAssist!:
     <a href="https://www.paypal.com/donate/?business=R4CEZAQB6AEWQ&no_recurring=0&item_name=Support+the+development+of+making+a+more+advanced+AI+Mechanic!&currency_code=USD"
       target="_blank">Donate Here</a>
   </h2>

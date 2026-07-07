@@ -1,65 +1,42 @@
-"""Import and run app."""
-#from aimechanic_app import create_app
-
-#app = create_app()
-
-#if __name__ == "__main__":
-#    app.run(debug=True)
-
-#"""Import and run app."""
-#from aimechanic_app import app
-
-#if __name__ == "__main__":
-#    app.run(debug=True)
-
-from flask import Flask, request, redirect, render_template, url_for
-#from flask_pymongo import PyMongo
-from bson.objectid import ObjectId
-#from pymongo.mongo_client import MongoClient
-#from pymongo.server_api import ServerApi
+from flask import Flask, request, render_template, session
 from main import askQuestion
-
-from datetime import datetime
-import calendar
-import os
 from dotenv import load_dotenv
 
-# Written with help from https://www.guru99.com/calendar-in-python.html
-
-############################################################
-# SETUP
-############################################################
-
-
-
-############################################################
-# ROUTES
-############################################################
-
 def create_app():
-
     app = Flask(__name__)
     load_dotenv()
-    
-# Send a ping to confirm a successful connection
 
-    @app.route('/', methods=['GET', 'POST'])
+    # Required for Flask sessions
+    app.secret_key = "replace_this_with_a_random_secret_key"
+
+    @app.route("/", methods=["GET", "POST"])
     def base():
-        """Display the events list page."""
+        # Initialize chat history
+        if "chat_history" not in session:
+            session["chat_history"] = []
 
-        if request.method == 'POST':
-            prompt = request.form.get('prompt')
-            outputPresent=True
+        if request.method == "POST":
+            prompt = request.form.get("prompt")
 
-            output=askQuestion(prompt)
-            newOutput=prompt
-            return render_template('base.html', output=output, newOutput=newOutput,outputPresent=outputPresent)
-        else:
-            outputPresent=False
-  
-        return render_template('base.html', outputPresent=outputPresent)
+            if prompt:
+                output = askQuestion(prompt)
+
+                history = session["chat_history"]
+                history.append({
+                    "prompt": prompt,
+                    "output": output
+                })
+
+                session["chat_history"] = history
+
+        return render_template(
+            "base.html",
+            chat_history=session["chat_history"]
+        )
+
     return app
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     app = create_app()
     app.run(debug=True)
